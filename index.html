@@ -160,22 +160,56 @@ a {
   align-items: center;
   overflow: hidden;
   padding-top: 5rem;
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 100%, rgba(34,197,94,0.13) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(239,68,68,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(245,158,11,0.04) 0%, transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 59px,
+      rgba(255,255,255,0.018) 60px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 59px,
+      rgba(255,255,255,0.018) 60px
+    ),
+    var(--bg);
 }
 
 /* Esquinas de color */
 .hero-corner-green {
   position: absolute;
   bottom: 0; left: 0;
-  width: 55%; height: 65%;
-  background: radial-gradient(ellipse at 0% 100%, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+  width: 60%; height: 70%;
+  background: radial-gradient(ellipse at 0% 100%, rgba(34, 197, 94, 0.22) 0%, transparent 65%);
   pointer-events: none;
 }
 .hero-corner-red {
   position: absolute;
   top: 0; right: 0;
-  width: 55%; height: 65%;
-  background: radial-gradient(ellipse at 100% 0%, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+  width: 60%; height: 70%;
+  background: radial-gradient(ellipse at 100% 0%, rgba(239, 68, 68, 0.18) 0%, transparent 65%);
   pointer-events: none;
+}
+
+/* Candlestick wave lines left (green) */
+.hero-chart-left {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 42%; height: 55%;
+  pointer-events: none;
+  opacity: 0.22;
+}
+/* Candlestick wave lines right (red) */
+.hero-chart-right {
+  position: absolute;
+  top: 0; right: 0;
+  width: 42%; height: 55%;
+  pointer-events: none;
+  opacity: 0.18;
 }
 
 /* Toro — esquina inferior izquierda */
@@ -189,11 +223,13 @@ a {
   padding: 1.5rem;
 }
 .hero-bull .animal-emoji {
-  font-size: clamp(5rem, 9vw, 9rem);
+  font-size: clamp(5.5rem, 10vw, 10rem);
   line-height: 1;
   filter:
-    drop-shadow(0 0 30px rgba(34, 197, 94, 0.9))
-    drop-shadow(0 0 70px rgba(34, 197, 94, 0.4));
+    sepia(60%) saturate(300%) hue-rotate(-10deg) brightness(1.1)
+    drop-shadow(0 0 20px rgba(245, 158, 11, 0.7))
+    drop-shadow(0 0 60px rgba(34, 197, 94, 0.5))
+    drop-shadow(0 0 100px rgba(34, 197, 94, 0.25));
   animation: bullFloat 3.5s ease-in-out infinite;
   display: block;
 }
@@ -216,11 +252,13 @@ a {
   padding: 1.5rem;
 }
 .hero-bear .animal-emoji {
-  font-size: clamp(4rem, 7.5vw, 8rem);
+  font-size: clamp(4.5rem, 8vw, 9rem);
   line-height: 1;
   filter:
-    drop-shadow(0 0 30px rgba(239, 68, 68, 0.9))
-    drop-shadow(0 0 70px rgba(239, 68, 68, 0.4));
+    sepia(40%) saturate(250%) hue-rotate(310deg) brightness(1.05)
+    drop-shadow(0 0 20px rgba(245, 158, 11, 0.5))
+    drop-shadow(0 0 55px rgba(239, 68, 68, 0.6))
+    drop-shadow(0 0 90px rgba(239, 68, 68, 0.25));
   animation: bearFloat 4s ease-in-out infinite;
   display: block;
   transform: scaleX(-1);
@@ -390,8 +428,10 @@ a {
   padding: 1rem;
 }
 .hero-visual svg {
-  max-width: 380px;
-  filter: drop-shadow(0 10px 40px rgba(34, 197, 94, 0.1));
+  max-width: 400px;
+  filter:
+    drop-shadow(0 0 30px rgba(245, 158, 11, 0.15))
+    drop-shadow(0 16px 48px rgba(0, 0, 0, 0.5));
 }
 
 /* Badge flotante: tasa de victoria */
@@ -1439,6 +1479,65 @@ a {
 }
 
 /* =============================================
+   TRADE IMAGE CARDS (capturas reales)
+   ============================================= */
+.trade-img-card {
+  background: #09090f;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, transform 0.25s, box-shadow 0.3s;
+}
+.trade-img-card:hover {
+  border-color: rgba(34,197,94,0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 24px rgba(34,197,94,0.07);
+}
+.trade-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #060610;
+  position: relative;
+}
+.trade-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.trade-img-card:hover .trade-img-wrap img {
+  transform: scale(1.03);
+}
+.trade-caption {
+  padding: 1rem 1.25rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.tc-main {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: -0.01em;
+}
+.tc-main--roi {
+  font-size: 1.25rem;
+  color: var(--gold);
+}
+.tc-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* =============================================
    CTA FINAL
    ============================================= */
 #cta {
@@ -1654,7 +1753,7 @@ footer {
       <li><a href="#results">Resultados</a></li>
       <li><a href="#trades">Trades</a></li>
     </ul>
-    <a href="#products" class="nav-cta">Unirme al VIP →</a>
+    <a href="#products" class="nav-cta" href="#vip-plans">Unirme al VIP →</a>
   </nav>
 
   <!-- HERO -->
@@ -1663,6 +1762,55 @@ footer {
     <!-- Decoración: esquinas de color -->
     <div class="hero-corner-green"></div>
     <div class="hero-corner-red"></div>
+
+    <!-- Candlestick wave — verde (bottom-left) -->
+    <svg class="hero-chart-left" viewBox="0 0 420 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="waveGreenFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#22c55e" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Wave fill -->
+      <path d="M0 260 L0 200 C30 185, 45 155, 60 165 S90 145, 110 130 S145 100, 170 110 S205 85, 230 70 S265 45, 290 55 S325 30, 350 20 S390 10, 420 5 L420 260 Z" fill="url(#waveGreenFill)"/>
+      <!-- Wave line -->
+      <path d="M0 200 C30 185, 45 155, 60 165 S90 145, 110 130 S145 100, 170 110 S205 85, 230 70 S265 45, 290 55 S325 30, 350 20 S390 10, 420 5" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Candle wicks -->
+      <line x1="60" y1="148" x2="60" y2="182" stroke="#22c55e" stroke-width="1.5"/>
+      <rect x="55" y="158" width="10" height="12" fill="#22c55e" rx="1"/>
+      <line x1="110" y1="112" x2="110" y2="148" stroke="#22c55e" stroke-width="1.5"/>
+      <rect x="105" y="122" width="10" height="14" fill="#22c55e" rx="1"/>
+      <line x1="170" y1="93" x2="170" y2="128" stroke="#22c55e" stroke-width="1.5"/>
+      <rect x="165" y="103" width="10" height="14" fill="#22c55e" rx="1"/>
+      <line x1="230" y1="52" x2="230" y2="88" stroke="#22c55e" stroke-width="1.5"/>
+      <rect x="225" y="62" width="10" height="16" fill="#22c55e" rx="1"/>
+      <line x1="290" y1="36" x2="290" y2="72" stroke="#22c55e" stroke-width="1.5"/>
+      <rect x="285" y="46" width="10" height="16" fill="#22c55e" rx="1"/>
+      <line x1="350" y1="2" x2="350" y2="36" stroke="#22c55e" stroke-width="1.5"/>
+      <rect x="345" y="12" width="10" height="16" fill="#22c55e" rx="1"/>
+    </svg>
+
+    <!-- Candlestick wave — roja (top-right) -->
+    <svg class="hero-chart-right" viewBox="0 0 420 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="transform:scaleX(-1)">
+      <defs>
+        <linearGradient id="waveRedFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d="M0 0 L0 60 C30 75, 50 95, 70 85 S105 110, 130 125 S165 148, 190 138 S225 160, 255 175 S290 195, 320 185 S365 210, 420 230 L420 0 Z" fill="url(#waveRedFill)"/>
+      <path d="M0 60 C30 75, 50 95, 70 85 S105 110, 130 125 S165 148, 190 138 S225 160, 255 175 S290 195, 320 185 S365 210, 420 230" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="70" y1="68" x2="70" y2="102" stroke="#ef4444" stroke-width="1.5"/>
+      <rect x="65" y="78" width="10" height="14" fill="#ef4444" rx="1"/>
+      <line x1="130" y1="108" x2="130" y2="142" stroke="#ef4444" stroke-width="1.5"/>
+      <rect x="125" y="118" width="10" height="14" fill="#ef4444" rx="1"/>
+      <line x1="190" y1="120" x2="190" y2="156" stroke="#ef4444" stroke-width="1.5"/>
+      <rect x="185" y="130" width="10" height="16" fill="#ef4444" rx="1"/>
+      <line x1="255" y1="156" x2="255" y2="192" stroke="#ef4444" stroke-width="1.5"/>
+      <rect x="250" y="166" width="10" height="16" fill="#ef4444" rx="1"/>
+      <line x1="320" y1="166" x2="320" y2="204" stroke="#ef4444" stroke-width="1.5"/>
+      <rect x="315" y="176" width="10" height="18" fill="#ef4444" rx="1"/>
+    </svg>
 
     <!-- Toro — esquina inferior izquierda -->
     <div class="hero-bull">
@@ -1688,7 +1836,7 @@ footer {
           analizadas por un trader con 4 años de experiencia y <strong>+$59,000 generados</strong>.
         </p>
         <div class="hero-btns">
-          <a href="#products" class="btn-primary">🚀 Quiero el VIP</a>
+          <a href="#vip-plans" class="btn-primary">🚀 Quiero el VIP</a>
           <a href="#about" class="btn-secondary">Conocer más</a>
         </div>
         <!-- Mini estadísticas -->
@@ -1699,54 +1847,105 @@ footer {
         </ul>
       </div>
 
-      <!-- Escalera de billetes de $100 -->
+      <!-- Escalera de billetes de $100 — versión dorada dramática -->
       <div class="hero-visual">
-        <svg viewBox="0 0 340 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 360 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
+            <!-- Gradiente dorado para billetes -->
             <linearGradient id="billGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#14532d"/>
-              <stop offset="100%" stop-color="#166534"/>
+              <stop offset="0%" stop-color="#1a4a2e"/>
+              <stop offset="40%" stop-color="#1f6035"/>
+              <stop offset="100%" stop-color="#14532d"/>
             </linearGradient>
-            <filter id="shadow">
-              <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="rgba(0,0,0,0.6)"/>
+            <linearGradient id="billShine" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgba(250,204,21,0)" />
+              <stop offset="40%" stop-color="rgba(250,204,21,0.18)"/>
+              <stop offset="100%" stop-color="rgba(250,204,21,0)"/>
+            </linearGradient>
+            <linearGradient id="goldTrend" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.1"/>
+              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.5"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="billShadow">
+              <feDropShadow dx="3" dy="5" stdDeviation="5" flood-color="rgba(0,0,0,0.75)"/>
+            </filter>
+            <filter id="topGlow">
+              <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#f59e0b" flood-opacity="0.7"/>
             </filter>
           </defs>
-          <!-- Línea de tendencia -->
-          <line x1="20" y1="270" x2="310" y2="30" stroke="rgba(34,197,94,0.3)" stroke-width="1" stroke-dasharray="6,4"/>
-          <!-- Billetes en escalera -->
-          <g filter="url(#shadow)" transform="translate(10,220)">
-            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.5)" stroke-width="1"/>
-            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.2)" stroke-width="1"/>
-            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+
+          <!-- Línea de tendencia dorada -->
+          <line x1="20" y1="290" x2="330" y2="20" stroke="url(#goldTrend)" stroke-width="1.5" stroke-dasharray="7,5"/>
+
+          <!-- Fondo de brillo detrás del escalón superior -->
+          <ellipse cx="260" cy="52" rx="55" ry="22" fill="rgba(245,158,11,0.08)"/>
+
+          <!-- Billetes en escalera: se hacen más brillantes arriba -->
+          <!-- Escalón 1 (más bajo, izquierda) -->
+          <g filter="url(#billShadow)" transform="translate(12,240)">
+            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(134,239,172,0.35)" stroke-width="1"/>
+            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.12)" stroke-width="1"/>
+            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
+            <text x="46" y="25" text-anchor="middle" fill="rgba(187,247,208,0.85)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
           </g>
-          <g filter="url(#shadow)" transform="translate(50,183)">
-            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.5)" stroke-width="1"/>
-            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.2)" stroke-width="1"/>
-            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+
+          <!-- Escalón 2 -->
+          <g filter="url(#billShadow)" transform="translate(54,198)">
+            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(134,239,172,0.4)" stroke-width="1"/>
+            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.15)" stroke-width="1"/>
+            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
+            <text x="46" y="25" text-anchor="middle" fill="rgba(187,247,208,0.9)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
           </g>
-          <g filter="url(#shadow)" transform="translate(90,146)">
-            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.5)" stroke-width="1"/>
-            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.2)" stroke-width="1"/>
-            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+
+          <!-- Escalón 3 -->
+          <g filter="url(#billShadow)" transform="translate(96,156)">
+            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(134,239,172,0.45)" stroke-width="1"/>
+            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.18)" stroke-width="1"/>
+            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
+            <text x="46" y="25" text-anchor="middle" fill="rgba(187,247,208,0.9)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
           </g>
-          <g filter="url(#shadow)" transform="translate(130,109)">
-            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.55)" stroke-width="1"/>
-            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.25)" stroke-width="1"/>
-            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+
+          <!-- Escalón 4 -->
+          <g filter="url(#billShadow)" transform="translate(138,114)">
+            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(250,204,21,0.3)" stroke-width="1"/>
+            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(250,204,21,0.12)" stroke-width="1"/>
+            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
+            <text x="46" y="25" text-anchor="middle" fill="rgba(253,230,138,0.95)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
           </g>
-          <g filter="url(#shadow)" transform="translate(170,72)">
-            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.6)" stroke-width="1"/>
-            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.3)" stroke-width="1"/>
-            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+
+          <!-- Escalón 5 -->
+          <g filter="url(#billShadow)" transform="translate(180,72)">
+            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(250,204,21,0.5)" stroke-width="1.2"/>
+            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(250,204,21,0.2)" stroke-width="1"/>
+            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
+            <text x="46" y="25" text-anchor="middle" fill="rgba(253,230,138,0.98)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
           </g>
-          <g filter="url(#shadow)" transform="translate(210,35)">
-            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.7)" stroke-width="1"/>
-            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.35)" stroke-width="1"/>
-            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+
+          <!-- Escalón 6 (cima — dorado brillante) -->
+          <g filter="url(#topGlow)" transform="translate(222,30)">
+            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(250,204,21,0.85)" stroke-width="1.5"/>
+            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(250,204,21,0.35)" stroke-width="1"/>
+            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
+            <text x="46" y="25" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="bold" font-family="monospace">$100</text>
           </g>
-          <!-- Flecha arriba -->
-          <polygon points="295,15 308,15 301,3" fill="#22c55e"/>
-          <line x1="301" y1="15" x2="301" y2="35" stroke="rgba(34,197,94,0.6)" stroke-width="2"/>
+
+          <!-- Flecha ascendente dorada -->
+          <g filter="url(#glow)">
+            <line x1="316" y1="50" x2="316" y2="22" stroke="#f59e0b" stroke-width="2.5"/>
+            <polygon points="308,26 316,8 324,26" fill="#f59e0b"/>
+          </g>
+
+          <!-- Pequeños puntos de datos -->
+          <circle cx="58" cy="268" r="3" fill="#22c55e" opacity="0.6"/>
+          <circle cx="100" cy="226" r="3" fill="#22c55e" opacity="0.7"/>
+          <circle cx="142" cy="184" r="3" fill="#22c55e" opacity="0.8"/>
+          <circle cx="184" cy="142" r="3.5" fill="#f59e0b" opacity="0.8"/>
+          <circle cx="226" cy="100" r="3.5" fill="#f59e0b" opacity="0.9"/>
+          <circle cx="268" cy="58" r="4" fill="#f59e0b" opacity="1"/>
         </svg>
 
         <!-- Badges flotantes sobre el visual -->
@@ -1955,7 +2154,7 @@ footer {
       </article>
 
       <!-- PLANES VIP -->
-      <div class="vip-header">
+      <div class="vip-header" id="vip-plans">
         <span class="section-label">Canal VIP</span>
         <h3>Señales VIP en tiempo real</h3>
         <p>Recibe 1–2 señales diarias basadas en oportunidades reales del mercado.
@@ -2153,163 +2352,70 @@ footer {
       <div class="trades-grid">
 
         <!-- 1. EDGEUSDT Short — mayor ganancia en dólares -->
-        <article class="trade-card">
-          <div class="tc-header">
-            <div class="tc-avatar">JR</div>
-            <div>
-              <p class="tc-user">Iamjorgeramirez</p>
-              <p class="tc-date">2026-04-04 · 09:41</p>
-            </div>
+        <figure class="trade-img-card">
+          <div class="trade-img-wrap">
+            <img src="trades/edge-short.jpg" alt="EDGEUSDT Short 20x +4,297 USDT">
           </div>
-          <div class="tc-body">
-            <p class="tc-pair">EDGEUSDT <span>Perpetuo</span></p>
-            <div class="tc-tags">
-              <span class="tc-tag tc-short">Short</span>
-              <span class="tc-tag tc-lev">20x</span>
-            </div>
-            <p class="tc-profit">+4,297.06 <span>USDT</span></p>
-            <p class="tc-roi">+213.89%</p>
-            <div class="tc-prices">
-              <div><span>Entrada</span><strong>1.0250982</strong></div>
-              <div><span>Salida</span><strong>0.9146000</strong></div>
-            </div>
-          </div>
-          <div class="tc-footer">
-            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
-          </div>
-        </article>
+          <figcaption class="trade-caption">
+            <span class="tc-main">+$4,297 USD · ₡1,976,648 CRC</span>
+            <span class="tc-desc">EDGEUSDT Short 20x — +213.89% ROI en un solo trade</span>
+          </figcaption>
+        </figure>
 
         <!-- 2. EDGEUSDT Long -->
-        <article class="trade-card">
-          <div class="tc-header">
-            <div class="tc-avatar">JR</div>
-            <div>
-              <p class="tc-user">Iamjorgeramirez</p>
-              <p class="tc-date">2026-04-05 · 01:19</p>
-            </div>
+        <figure class="trade-img-card">
+          <div class="trade-img-wrap">
+            <img src="trades/edge-long.jpg" alt="EDGEUSDT Long 20x +1,509 USDT">
           </div>
-          <div class="tc-body">
-            <p class="tc-pair">EDGEUSDT <span>Perpetuo</span></p>
-            <div class="tc-tags">
-              <span class="tc-tag tc-long">Long</span>
-              <span class="tc-tag tc-lev">20x</span>
-            </div>
-            <p class="tc-profit">+1,509.97 <span>USDT</span></p>
-            <p class="tc-roi">+140.88%</p>
-            <div class="tc-prices">
-              <div><span>Entrada</span><strong>0.8678000</strong></div>
-              <div><span>Salida</span><strong>0.9298279</strong></div>
-            </div>
-          </div>
-          <div class="tc-footer">
-            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
-          </div>
-        </article>
+          <figcaption class="trade-caption">
+            <span class="tc-main">+$1,509 USD · ₡694,540 CRC</span>
+            <span class="tc-desc">EDGEUSDT Long 20x — +140.88% ROI, compra en soporte clave</span>
+          </figcaption>
+        </figure>
 
         <!-- 3. ASTERUSDT Long -->
-        <article class="trade-card">
-          <div class="tc-header">
-            <div class="tc-avatar">JR</div>
-            <div>
-              <p class="tc-user">Iamjorgeramirez</p>
-              <p class="tc-date">2026-04-04 · 23:26</p>
-            </div>
+        <figure class="trade-img-card">
+          <div class="trade-img-wrap">
+            <img src="trades/aster-long.jpg" alt="ASTERUSDT Long 25x +911 USDT">
           </div>
-          <div class="tc-body">
-            <p class="tc-pair">ASTERUSDT <span>Perpetuo</span></p>
-            <div class="tc-tags">
-              <span class="tc-tag tc-long">Long</span>
-              <span class="tc-tag tc-lev">25x</span>
-            </div>
-            <p class="tc-profit">+911.89 <span>USDT</span></p>
-            <p class="tc-roi">+46.39%</p>
-            <div class="tc-prices">
-              <div><span>Entrada</span><strong>0.6557000</strong></div>
-              <div><span>Último</span><strong>0.6681000</strong></div>
-            </div>
-          </div>
-          <div class="tc-footer">
-            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
-          </div>
-        </article>
+          <figcaption class="trade-caption">
+            <span class="tc-main">+$911 USD · ₡419,060 CRC</span>
+            <span class="tc-desc">ASTERUSDT Long 25x — +46.39% ROI en posición abierta</span>
+          </figcaption>
+        </figure>
 
         <!-- 4. BTCUSDT Short -->
-        <article class="trade-card">
-          <div class="tc-header">
-            <div class="tc-avatar">JR</div>
-            <div>
-              <p class="tc-user">Iamjorgeramirez</p>
-              <p class="tc-date">2026-03-24 · 11:51</p>
-            </div>
+        <figure class="trade-img-card">
+          <div class="trade-img-wrap">
+            <img src="trades/btc-short.jpg" alt="BTCUSDT Short 25x +763 USDT">
           </div>
-          <div class="tc-body">
-            <p class="tc-pair">BTCUSDT <span>Perpetuo</span></p>
-            <div class="tc-tags">
-              <span class="tc-tag tc-short">Short</span>
-              <span class="tc-tag tc-lev">25x</span>
-            </div>
-            <p class="tc-profit">+763.22 <span>USDT</span></p>
-            <div class="tc-prices">
-              <div><span>Entrada</span><strong>70,903.35</strong></div>
-              <div><span>Último</span><strong>69,011.40</strong></div>
-            </div>
-          </div>
-          <div class="tc-footer">
-            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
-          </div>
-        </article>
+          <figcaption class="trade-caption">
+            <span class="tc-main">+$763 USD · ₡350,980 CRC</span>
+            <span class="tc-desc">BTCUSDT Short 25x — ruptura de soporte en Bitcoin</span>
+          </figcaption>
+        </figure>
 
-        <!-- 5. LABUSDT Long — mayor ROI% sin monto -->
-        <article class="trade-card">
-          <div class="tc-header">
-            <div class="tc-avatar">JR</div>
-            <div>
-              <p class="tc-user">Iamjorgeramirez</p>
-              <p class="tc-date">2026-04-13 · 20:33</p>
-            </div>
+        <!-- 5. LABUSDT Long — mayor ROI% -->
+        <figure class="trade-img-card">
+          <div class="trade-img-wrap">
+            <img src="trades/lab-long.jpg" alt="LABUSDT Long 25x +442.92%">
           </div>
-          <div class="tc-body">
-            <p class="tc-pair">LABUSDT <span>Perpetual</span></p>
-            <div class="tc-tags">
-              <span class="tc-tag tc-long">Long</span>
-              <span class="tc-tag tc-lev">25x</span>
-            </div>
-            <p class="tc-profit tc-profit--roi">+442.92%</p>
-            <div class="tc-prices">
-              <div><span>Entrada</span><strong>0.5546546</strong></div>
-              <div><span>Salida</span><strong>0.6536056</strong></div>
-            </div>
-          </div>
-          <div class="tc-footer">
-            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
-          </div>
-        </article>
+          <figcaption class="trade-caption">
+            <span class="tc-main tc-main--roi">+442.92% ROI</span>
+            <span class="tc-desc">LABUSDT Long 25x — entrada en mínimo, salida en ruptura alcista</span>
+          </figcaption>
+        </figure>
 
         <!-- 6. FOLKSUSDT Long -->
-        <article class="trade-card">
-          <div class="tc-header">
-            <div class="tc-avatar">JR</div>
-            <div>
-              <p class="tc-user">Iamjorgeramirez</p>
-              <p class="tc-date">2026-04-13 · 21:46</p>
-            </div>
+        <figure class="trade-img-card">
+          <div class="trade-img-wrap">
+            <img src="trades/folks-long.jpg" alt="FOLKSUSDT Long 25x +224.22%">
           </div>
-          <div class="tc-body">
-            <p class="tc-pair">FOLKSUSDT <span>Perpetual</span></p>
-            <div class="tc-tags">
-              <span class="tc-tag tc-long">Long</span>
-              <span class="tc-tag tc-lev">25x</span>
-            </div>
-            <p class="tc-profit tc-profit--roi">+224.22%</p>
-            <div class="tc-prices">
-              <div><span>Entrada</span><strong>1.168000</strong></div>
-              <div><span>Último</span><strong>1.283000</strong></div>
-            </div>
-          </div>
-          <div class="tc-footer">
-            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
-          </div>
-        </article>
+          <figcaption class="trade-caption">
+            <span class="tc-main tc-main--roi">+224.22% ROI</span>
+            <span class="tc-desc">FOLKSUSDT Long 25x — señal en acumulación previa al breakout</span>
+          </figcaption>
+        </figure>
 
       </div>
     </div>
@@ -2322,7 +2428,7 @@ footer {
       <h2>¿Listo para <span class="text-green">multiplicar</span> tu capital?</h2>
       <p>No necesitas 4 años de experiencia. Solo necesitas las señales correctas, en el momento correcto. Eso es exactamente lo que ofrezco.</p>
       <div class="cta-btns">
-        <a href="#products" class="btn-primary">🚀 Unirme al VIP ahora</a>
+        <a href="#vip-plans" class="btn-primary">🚀 Unirme al VIP ahora</a>
         <a href="#products" class="btn-secondary">📚 Ver el curso</a>
       </div>
       <p class="cta-legal">⚠️ El trading de futuros implica riesgo de pérdida de capital. Opera solo con dinero que puedas permitirte perder. Resultados pasados no garantizan resultados futuros.</p>
@@ -2351,9 +2457,9 @@ footer {
           <h4>Productos</h4>
           <ul>
             <li><a href="#products">Curso ($29.99)</a></li>
-            <li><a href="#products">VIP Mensual ($39.99/mes)</a></li>
-            <li><a href="#products">VIP Trimestral ($99.99)</a></li>
-            <li><a href="#products">VIP Anual ($329.99)</a></li>
+            <li><a href="#vip-plans">VIP Mensual ($39.99/mes)</a></li>
+            <li><a href="#vip-plans">VIP Trimestral ($99.99)</a></li>
+            <li><a href="#vip-plans">VIP Anual ($329.99)</a></li>
           </ul>
         </nav>
         <div class="footer-links">
