@@ -513,19 +513,171 @@
       <div class="trades-header">
         <span class="section-label">Trades recientes</span>
         <h2>Resultados del último mes.</h2>
-        <p>Capturas de pantalla de trades reales ejecutados en Binance. Próximamente aquí.</p>
+        <p>Trades reales ejecutados en Binance Futures. Ordenados por ganancia.</p>
       </div>
+
       <div class="trades-grid">
-        <figure class="trade-slot"><img src="trades/trade-01.jpg" alt="Trade reciente 1"><figcaption>Trade reciente</figcaption></figure>
-        <figure class="trade-slot"><img src="trades/trade-02.jpg" alt="Trade reciente 2"><figcaption>Trade reciente</figcaption></figure>
-        <figure class="trade-slot"><img src="trades/trade-03.jpg" alt="Trade reciente 3"><figcaption>Trade reciente</figcaption></figure>
-        <figure class="trade-slot"><img src="trades/trade-04.jpg" alt="Trade reciente 4"><figcaption>Trade reciente</figcaption></figure>
-        <figure class="trade-slot"><img src="trades/trade-05.jpg" alt="Trade reciente 5"><figcaption>Trade reciente</figcaption></figure>
-        <figure class="trade-slot"><img src="trades/trade-06.jpg" alt="Trade reciente 6"><figcaption>Trade reciente</figcaption></figure>
-        <figure class="trade-slot"><img src="trades/trade-07.jpg" alt="Trade reciente 7"><figcaption>Trade reciente</figcaption></figure>
-        <figure class="trade-slot"><img src="trades/trade-08.jpg" alt="Trade reciente 8"><figcaption>Trade reciente</figcaption></figure>
+
+        <!-- 1. EDGEUSDT Short — mayor ganancia en dólares -->
+        <article class="trade-card">
+          <div class="tc-header">
+            <div class="tc-avatar">JR</div>
+            <div>
+              <p class="tc-user">Iamjorgeramirez</p>
+              <p class="tc-date">2026-04-04 · 09:41</p>
+            </div>
+          </div>
+          <div class="tc-body">
+            <p class="tc-pair">EDGEUSDT <span>Perpetuo</span></p>
+            <div class="tc-tags">
+              <span class="tc-tag tc-short">Short</span>
+              <span class="tc-tag tc-lev">20x</span>
+            </div>
+            <p class="tc-profit">+4,297.06 <span>USDT</span></p>
+            <p class="tc-roi">+213.89%</p>
+            <div class="tc-prices">
+              <div><span>Entrada</span><strong>1.0250982</strong></div>
+              <div><span>Salida</span><strong>0.9146000</strong></div>
+            </div>
+          </div>
+          <div class="tc-footer">
+            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
+          </div>
+        </article>
+
+        <!-- 2. EDGEUSDT Long -->
+        <article class="trade-card">
+          <div class="tc-header">
+            <div class="tc-avatar">JR</div>
+            <div>
+              <p class="tc-user">Iamjorgeramirez</p>
+              <p class="tc-date">2026-04-05 · 01:19</p>
+            </div>
+          </div>
+          <div class="tc-body">
+            <p class="tc-pair">EDGEUSDT <span>Perpetuo</span></p>
+            <div class="tc-tags">
+              <span class="tc-tag tc-long">Long</span>
+              <span class="tc-tag tc-lev">20x</span>
+            </div>
+            <p class="tc-profit">+1,509.97 <span>USDT</span></p>
+            <p class="tc-roi">+140.88%</p>
+            <div class="tc-prices">
+              <div><span>Entrada</span><strong>0.8678000</strong></div>
+              <div><span>Salida</span><strong>0.9298279</strong></div>
+            </div>
+          </div>
+          <div class="tc-footer">
+            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
+          </div>
+        </article>
+
+        <!-- 3. ASTERUSDT Long -->
+        <article class="trade-card">
+          <div class="tc-header">
+            <div class="tc-avatar">JR</div>
+            <div>
+              <p class="tc-user">Iamjorgeramirez</p>
+              <p class="tc-date">2026-04-04 · 23:26</p>
+            </div>
+          </div>
+          <div class="tc-body">
+            <p class="tc-pair">ASTERUSDT <span>Perpetuo</span></p>
+            <div class="tc-tags">
+              <span class="tc-tag tc-long">Long</span>
+              <span class="tc-tag tc-lev">25x</span>
+            </div>
+            <p class="tc-profit">+911.89 <span>USDT</span></p>
+            <p class="tc-roi">+46.39%</p>
+            <div class="tc-prices">
+              <div><span>Entrada</span><strong>0.6557000</strong></div>
+              <div><span>Último</span><strong>0.6681000</strong></div>
+            </div>
+          </div>
+          <div class="tc-footer">
+            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
+          </div>
+        </article>
+
+        <!-- 4. BTCUSDT Short -->
+        <article class="trade-card">
+          <div class="tc-header">
+            <div class="tc-avatar">JR</div>
+            <div>
+              <p class="tc-user">Iamjorgeramirez</p>
+              <p class="tc-date">2026-03-24 · 11:51</p>
+            </div>
+          </div>
+          <div class="tc-body">
+            <p class="tc-pair">BTCUSDT <span>Perpetuo</span></p>
+            <div class="tc-tags">
+              <span class="tc-tag tc-short">Short</span>
+              <span class="tc-tag tc-lev">25x</span>
+            </div>
+            <p class="tc-profit">+763.22 <span>USDT</span></p>
+            <div class="tc-prices">
+              <div><span>Entrada</span><strong>70,903.35</strong></div>
+              <div><span>Último</span><strong>69,011.40</strong></div>
+            </div>
+          </div>
+          <div class="tc-footer">
+            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
+          </div>
+        </article>
+
+        <!-- 5. LABUSDT Long — mayor ROI% sin monto -->
+        <article class="trade-card">
+          <div class="tc-header">
+            <div class="tc-avatar">JR</div>
+            <div>
+              <p class="tc-user">Iamjorgeramirez</p>
+              <p class="tc-date">2026-04-13 · 20:33</p>
+            </div>
+          </div>
+          <div class="tc-body">
+            <p class="tc-pair">LABUSDT <span>Perpetual</span></p>
+            <div class="tc-tags">
+              <span class="tc-tag tc-long">Long</span>
+              <span class="tc-tag tc-lev">25x</span>
+            </div>
+            <p class="tc-profit tc-profit--roi">+442.92%</p>
+            <div class="tc-prices">
+              <div><span>Entrada</span><strong>0.5546546</strong></div>
+              <div><span>Salida</span><strong>0.6536056</strong></div>
+            </div>
+          </div>
+          <div class="tc-footer">
+            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
+          </div>
+        </article>
+
+        <!-- 6. FOLKSUSDT Long -->
+        <article class="trade-card">
+          <div class="tc-header">
+            <div class="tc-avatar">JR</div>
+            <div>
+              <p class="tc-user">Iamjorgeramirez</p>
+              <p class="tc-date">2026-04-13 · 21:46</p>
+            </div>
+          </div>
+          <div class="tc-body">
+            <p class="tc-pair">FOLKSUSDT <span>Perpetual</span></p>
+            <div class="tc-tags">
+              <span class="tc-tag tc-long">Long</span>
+              <span class="tc-tag tc-lev">25x</span>
+            </div>
+            <p class="tc-profit tc-profit--roi">+224.22%</p>
+            <div class="tc-prices">
+              <div><span>Entrada</span><strong>1.168000</strong></div>
+              <div><span>Último</span><strong>1.283000</strong></div>
+            </div>
+          </div>
+          <div class="tc-footer">
+            <span class="tc-bnb">⬡ BINANCE FUTURES</span>
+          </div>
+        </article>
+
       </div>
-      <p class="trades-note">📲 <strong>Las capturas se agregarán pronto.</strong> Únete al canal VIP para ver los resultados en tiempo real.</p>
     </div>
   </section>
 

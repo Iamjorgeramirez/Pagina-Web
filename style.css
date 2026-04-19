@@ -1275,52 +1275,144 @@ a {
 
 .trades-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
   margin-bottom: 1.5rem;
 }
 
-.trade-slot {
-  aspect-ratio: 9 / 16;
-  background: var(--card);
-  border: 1px dashed rgba(34,197,94,0.2);
-  border-radius: 12px;
+/* Tarjeta estilo Binance */
+.trade-card {
+  background: #0a0a0c;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
   overflow: hidden;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.3s, transform 0.25s, box-shadow 0.3s;
 }
-.trade-slot:hover {
-  border-color: rgba(34,197,94,0.5);
-  background: var(--card-hover);
-}
-.trade-slot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-/* Si la imagen no carga, mostrar placeholder */
-.trade-slot img[src=""] ,
-.trade-slot img:not([src]) {
-  display: none;
-}
-.trade-slot figcaption {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  text-align: center;
-  padding: 0.5rem;
+.trade-card:hover {
+  border-color: rgba(34,197,94,0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
 }
 
-/* Cuando no hay imagen: mostrar ícono */
-.trade-slot:not(:has(img[src$=".jpg"]))::before,
-.trade-slot:has(img[src=""])::before {
-  content: '📸';
-  font-size: 1.75rem;
+.tc-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.tc-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #000;
+  flex-shrink: 0;
+}
+.tc-user {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.1rem;
+}
+.tc-date {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.tc-body {
+  padding: 1.25rem;
+  flex: 1;
+}
+.tc-pair {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.tc-pair span {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.tc-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.tc-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+.tc-long  { background: rgba(34,197,94,0.15); color: var(--green); }
+.tc-short { background: rgba(239,68,68,0.15);  color: var(--red); }
+.tc-lev   { background: rgba(255,255,255,0.07); color: var(--text-muted); }
+
+.tc-profit {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--green);
+  line-height: 1.1;
+  margin-bottom: 0.15rem;
+}
+.tc-profit span {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.tc-profit--roi {
+  font-size: 2.4rem;
+}
+.tc-roi {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 1rem;
+}
+
+.tc-prices {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.tc-prices > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.tc-prices span {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.tc-prices strong {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.tc-footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.3);
+}
+.tc-bnb {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #f0b90b;
+  letter-spacing: 0.05em;
 }
 
 .trades-note {
@@ -1473,7 +1565,7 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
   .trades-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   .footer-top {
     grid-template-columns: 1fr 1fr;
@@ -1498,6 +1590,12 @@ footer {
   .results-grid {
     grid-template-columns: 1fr;
   }
+  .trades-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
   .trades-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1529,6 +1627,6 @@ footer {
     text-align: center;
   }
   .trades-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
