@@ -160,56 +160,48 @@ a {
   align-items: center;
   overflow: hidden;
   padding-top: 5rem;
+  /* Dark slate / stone texture: layered diagonal grain + surface facets + corner glows */
   background:
-    radial-gradient(ellipse 80% 60% at 0% 100%, rgba(34,197,94,0.13) 0%, transparent 65%),
-    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(239,68,68,0.12) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(245,158,11,0.04) 0%, transparent 70%),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 59px,
-      rgba(255,255,255,0.018) 60px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 59px,
-      rgba(255,255,255,0.018) 60px
-    ),
-    var(--bg);
+    /* Corner color glows */
+    radial-gradient(ellipse 90% 70% at -8% 115%, rgba(34,197,94,0.32) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 70% at 108% -15%, rgba(239,68,68,0.26) 0%, transparent 55%),
+    /* Stone surface highlights (simulate facets / light catching edges) */
+    radial-gradient(ellipse 38% 22% at 10% 5%,  rgba(255,255,255,0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 28% 16% at 82% 3%,  rgba(255,255,255,0.04) 0%, transparent 100%),
+    radial-gradient(ellipse 22% 14% at 55% 92%, rgba(255,255,255,0.025) 0%, transparent 100%),
+    /* Stone grain: repeating diagonals at multiple angles & spacings */
+    repeating-linear-gradient(-41deg, transparent 0px, transparent 3px, rgba(255,255,255,0.014) 4px, transparent 5px),
+    repeating-linear-gradient( 53deg, transparent 0px, transparent 5px, rgba(255,255,255,0.010) 6px, transparent 7px),
+    repeating-linear-gradient(-67deg, transparent 0px, transparent 8px, rgba(0,0,0,0.07)       9px, transparent 10px),
+    repeating-linear-gradient( 78deg, transparent 0px, transparent 13px, rgba(0,0,0,0.05)      14px, transparent 15px),
+    repeating-linear-gradient(-22deg, transparent 0px, transparent 19px, rgba(255,255,255,0.007) 20px, transparent 21px),
+    /* Deep dark slate base */
+    linear-gradient(155deg, #0e0e18 0%, #07070d 30%, #0b0b13 60%, #050508 100%);
 }
 
-/* Esquinas de color */
+/* Esquinas de color (refuerzo adicional) */
 .hero-corner-green {
   position: absolute;
   bottom: 0; left: 0;
-  width: 60%; height: 70%;
-  background: radial-gradient(ellipse at 0% 100%, rgba(34, 197, 94, 0.22) 0%, transparent 65%);
+  width: 55%; height: 65%;
+  background: radial-gradient(ellipse at 0% 100%, rgba(34, 197, 94, 0.18) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero-corner-red {
   position: absolute;
   top: 0; right: 0;
-  width: 60%; height: 70%;
-  background: radial-gradient(ellipse at 100% 0%, rgba(239, 68, 68, 0.18) 0%, transparent 65%);
+  width: 55%; height: 65%;
+  background: radial-gradient(ellipse at 100% 0%, rgba(239, 68, 68, 0.15) 0%, transparent 60%);
   pointer-events: none;
 }
 
-/* Candlestick wave lines left (green) */
-.hero-chart-left {
+/* Full-width neon chart lines SVG background */
+.hero-bg-chart {
   position: absolute;
-  bottom: 0; left: 0;
-  width: 42%; height: 55%;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
   pointer-events: none;
-  opacity: 0.22;
-}
-/* Candlestick wave lines right (red) */
-.hero-chart-right {
-  position: absolute;
-  top: 0; right: 0;
-  width: 42%; height: 55%;
-  pointer-events: none;
-  opacity: 0.18;
 }
 
 /* Toro — esquina inferior izquierda */
@@ -1763,7 +1755,9 @@ footer {
     <div class="hero-corner-green"></div>
     <div class="hero-corner-red"></div>
 
-    <!-- Candlestick wave — verde (bottom-left) -->
+    <!-- ===== NEON CHART LINES — full-section background ===== -->
+    <!-- (reemplaza los svgs separados de chart-left / chart-right) -->
+    <!-- Candlestick wave — verde (bottom-left) - LEGACY START -->
     <svg class="hero-chart-left" viewBox="0 0 420 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="waveGreenFill" x1="0" y1="0" x2="0" y2="1">
@@ -1811,6 +1805,131 @@ footer {
       <line x1="320" y1="166" x2="320" y2="204" stroke="#ef4444" stroke-width="1.5"/>
       <rect x="315" y="176" width="10" height="18" fill="#ef4444" rx="1"/>
     </svg>
+    <!-- LEGACY END -->
+
+    <!-- Full-width neon chart background SVG -->
+    <svg class="hero-bg-chart" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <!-- Outer glow: wide feGaussianBlur -->
+        <filter id="glow-outer-g" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="18" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="b"/></feMerge>
+        </filter>
+        <filter id="glow-outer-r" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="18" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="b"/></feMerge>
+        </filter>
+        <!-- Mid glow: tighter blur -->
+        <filter id="glow-mid-g" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="6"/>
+        </filter>
+        <filter id="glow-mid-r" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="6"/>
+        </filter>
+        <!-- Inner glow: sharp crisp line softener -->
+        <filter id="glow-inner-g" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2.5"/>
+        </filter>
+        <filter id="glow-inner-r" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2.5"/>
+        </filter>
+        <!-- Gradient fills under waves -->
+        <linearGradient id="fillGreen" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#22c55e" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="fillRed" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#ef4444" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="0.15"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ── GREEN SIDE (left → center) ── -->
+      <!-- Area fill under the green wave -->
+      <path d="M-60 700 L-60 520 C80 490, 160 380, 260 415 S420 305, 520 360 S640 255, 740 285 S820 230, 870 248 L870 700 Z"
+            fill="url(#fillGreen)" opacity="0.9"/>
+
+      <!-- Layer 1: wide outer glow -->
+      <path d="M-60 520 C80 490, 160 380, 260 415 S420 305, 520 360 S640 255, 740 285 S820 230, 870 248"
+            fill="none" stroke="#22c55e" stroke-width="28" stroke-linecap="round" opacity="0.07"
+            filter="url(#glow-outer-g)"/>
+      <!-- Layer 2: mid glow -->
+      <path d="M-60 520 C80 490, 160 380, 260 415 S420 305, 520 360 S640 255, 740 285 S820 230, 870 248"
+            fill="none" stroke="#22c55e" stroke-width="10" stroke-linecap="round" opacity="0.22"
+            filter="url(#glow-mid-g)"/>
+      <!-- Layer 3: inner glow -->
+      <path d="M-60 520 C80 490, 160 380, 260 415 S420 305, 520 360 S640 255, 740 285 S820 230, 870 248"
+            fill="none" stroke="#4ade80" stroke-width="3.5" stroke-linecap="round" opacity="0.75"
+            filter="url(#glow-inner-g)"/>
+      <!-- Layer 4: crisp bright center line -->
+      <path d="M-60 520 C80 490, 160 380, 260 415 S420 305, 520 360 S640 255, 740 285 S820 230, 870 248"
+            fill="none" stroke="#86efac" stroke-width="1.5" stroke-linecap="round" opacity="0.95"/>
+
+      <!-- Green candlestick bodies (ascending) -->
+      <!-- Candle 1 -->
+      <line x1="120" y1="460" x2="120" y2="390" stroke="#22c55e" stroke-width="1.5" opacity="0.55" filter="url(#glow-mid-g)"/>
+      <rect x="112" y="400" width="16" height="55" fill="#22c55e" rx="2" opacity="0.42" filter="url(#glow-mid-g)"/>
+      <line x1="120" y1="515" x2="120" y2="462" stroke="#22c55e" stroke-width="1.5" opacity="0.55" filter="url(#glow-mid-g)"/>
+      <!-- Candle 2 -->
+      <line x1="250" y1="410" x2="250" y2="338" stroke="#22c55e" stroke-width="1.5" opacity="0.6" filter="url(#glow-mid-g)"/>
+      <rect x="242" y="348" width="16" height="58" fill="#22c55e" rx="2" opacity="0.47" filter="url(#glow-mid-g)"/>
+      <line x1="250" y1="465" x2="250" y2="412" stroke="#22c55e" stroke-width="1.5" opacity="0.6" filter="url(#glow-mid-g)"/>
+      <!-- Candle 3 -->
+      <line x1="400" y1="365" x2="400" y2="290" stroke="#22c55e" stroke-width="1.5" opacity="0.65" filter="url(#glow-mid-g)"/>
+      <rect x="392" y="300" width="16" height="60" fill="#22c55e" rx="2" opacity="0.52" filter="url(#glow-mid-g)"/>
+      <line x1="400" y1="418" x2="400" y2="368" stroke="#22c55e" stroke-width="1.5" opacity="0.65" filter="url(#glow-mid-g)"/>
+      <!-- Candle 4 -->
+      <line x1="550" y1="318" x2="550" y2="242" stroke="#22c55e" stroke-width="1.5" opacity="0.7" filter="url(#glow-mid-g)"/>
+      <rect x="542" y="252" width="16" height="62" fill="#22c55e" rx="2" opacity="0.57" filter="url(#glow-mid-g)"/>
+      <line x1="550" y1="372" x2="550" y2="320" stroke="#22c55e" stroke-width="1.5" opacity="0.7" filter="url(#glow-mid-g)"/>
+      <!-- Candle 5 -->
+      <line x1="700" y1="272" x2="700" y2="195" stroke="#22c55e" stroke-width="1.5" opacity="0.75" filter="url(#glow-mid-g)"/>
+      <rect x="692" y="205" width="16" height="63" fill="#22c55e" rx="2" opacity="0.62" filter="url(#glow-mid-g)"/>
+      <line x1="700" y1="326" x2="700" y2="274" stroke="#22c55e" stroke-width="1.5" opacity="0.75" filter="url(#glow-mid-g)"/>
+
+      <!-- ── RED SIDE (center → right) ── -->
+      <!-- Area fill under the red wave -->
+      <path d="M570 0 L570 175 C680 205, 760 315, 860 285 S1000 395, 1090 348 S1230 455, 1320 428 S1430 480, 1500 465 L1500 0 Z"
+            fill="url(#fillRed)" opacity="0.8"/>
+
+      <!-- Layer 1: wide outer glow -->
+      <path d="M570 175 C680 205, 760 315, 860 285 S1000 395, 1090 348 S1230 455, 1320 428 S1430 480, 1500 465"
+            fill="none" stroke="#ef4444" stroke-width="28" stroke-linecap="round" opacity="0.07"
+            filter="url(#glow-outer-r)"/>
+      <!-- Layer 2: mid glow -->
+      <path d="M570 175 C680 205, 760 315, 860 285 S1000 395, 1090 348 S1230 455, 1320 428 S1430 480, 1500 465"
+            fill="none" stroke="#ef4444" stroke-width="10" stroke-linecap="round" opacity="0.22"
+            filter="url(#glow-mid-r)"/>
+      <!-- Layer 3: inner glow -->
+      <path d="M570 175 C680 205, 760 315, 860 285 S1000 395, 1090 348 S1230 455, 1320 428 S1430 480, 1500 465"
+            fill="none" stroke="#f87171" stroke-width="3.5" stroke-linecap="round" opacity="0.75"
+            filter="url(#glow-inner-r)"/>
+      <!-- Layer 4: crisp bright center line -->
+      <path d="M570 175 C680 205, 760 315, 860 285 S1000 395, 1090 348 S1230 455, 1320 428 S1430 480, 1500 465"
+            fill="none" stroke="#fca5a5" stroke-width="1.5" stroke-linecap="round" opacity="0.95"/>
+
+      <!-- Red candlestick bodies (descending) -->
+      <!-- Candle 1 -->
+      <line x1="780" y1="248" x2="780" y2="322" stroke="#ef4444" stroke-width="1.5" opacity="0.55" filter="url(#glow-mid-r)"/>
+      <rect x="772" y="248" width="16" height="68" fill="#ef4444" rx="2" opacity="0.42" filter="url(#glow-mid-r)"/>
+      <line x1="780" y1="190" x2="780" y2="245" stroke="#ef4444" stroke-width="1.5" opacity="0.55" filter="url(#glow-mid-r)"/>
+      <!-- Candle 2 -->
+      <line x1="940" y1="306" x2="940" y2="382" stroke="#ef4444" stroke-width="1.5" opacity="0.6" filter="url(#glow-mid-r)"/>
+      <rect x="932" y="306" width="16" height="70" fill="#ef4444" rx="2" opacity="0.47" filter="url(#glow-mid-r)"/>
+      <line x1="940" y1="248" x2="940" y2="303" stroke="#ef4444" stroke-width="1.5" opacity="0.6" filter="url(#glow-mid-r)"/>
+      <!-- Candle 3 -->
+      <line x1="1090" y1="362" x2="1090" y2="440" stroke="#ef4444" stroke-width="1.5" opacity="0.65" filter="url(#glow-mid-r)"/>
+      <rect x="1082" y="362" width="16" height="72" fill="#ef4444" rx="2" opacity="0.52" filter="url(#glow-mid-r)"/>
+      <line x1="1090" y1="304" x2="1090" y2="359" stroke="#ef4444" stroke-width="1.5" opacity="0.65" filter="url(#glow-mid-r)"/>
+      <!-- Candle 4 -->
+      <line x1="1240" y1="420" x2="1240" y2="498" stroke="#ef4444" stroke-width="1.5" opacity="0.7" filter="url(#glow-mid-r)"/>
+      <rect x="1232" y="420" width="16" height="72" fill="#ef4444" rx="2" opacity="0.57" filter="url(#glow-mid-r)"/>
+      <line x1="1240" y1="362" x2="1240" y2="417" stroke="#ef4444" stroke-width="1.5" opacity="0.7" filter="url(#glow-mid-r)"/>
+      <!-- Candle 5 -->
+      <line x1="1390" y1="474" x2="1390" y2="552" stroke="#ef4444" stroke-width="1.5" opacity="0.75" filter="url(#glow-mid-r)"/>
+      <rect x="1382" y="474" width="16" height="72" fill="#ef4444" rx="2" opacity="0.62" filter="url(#glow-mid-r)"/>
+      <line x1="1390" y1="416" x2="1390" y2="471" stroke="#ef4444" stroke-width="1.5" opacity="0.75" filter="url(#glow-mid-r)"/>
+    </svg>
 
     <!-- Toro — esquina inferior izquierda -->
     <div class="hero-bull">
@@ -1847,105 +1966,165 @@ footer {
         </ul>
       </div>
 
-      <!-- Escalera de billetes de $100 — versión dorada dramática -->
+      <!-- Escalera de billetes de $100 — cilindros apilados 3D -->
       <div class="hero-visual">
-        <svg viewBox="0 0 360 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 380 340" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <!-- Gradiente dorado para billetes -->
-            <linearGradient id="billGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1a4a2e"/>
-              <stop offset="40%" stop-color="#1f6035"/>
-              <stop offset="100%" stop-color="#14532d"/>
+            <!-- Cuerpo del rollo: degradado vertical top-light → bottom-dark simula cilindro -->
+            <linearGradient id="cyl" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#7bc47b"/>
+              <stop offset="12%"  stop-color="#4a8a4a"/>
+              <stop offset="50%"  stop-color="#2d5c2d"/>
+              <stop offset="85%"  stop-color="#1a3a1a"/>
+              <stop offset="100%" stop-color="#0e220e"/>
             </linearGradient>
-            <linearGradient id="billShine" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="rgba(250,204,21,0)" />
-              <stop offset="40%" stop-color="rgba(250,204,21,0.18)"/>
-              <stop offset="100%" stop-color="rgba(250,204,21,0)"/>
+            <!-- Top face ellipse: más claro -->
+            <linearGradient id="cylTop" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#5aaa5a"/>
+              <stop offset="50%"  stop-color="#7acc7a"/>
+              <stop offset="100%" stop-color="#4a9a4a"/>
             </linearGradient>
-            <linearGradient id="goldTrend" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.1"/>
-              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.5"/>
+            <!-- Rollo dorado (cima) -->
+            <linearGradient id="cylGold" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#fef3c7"/>
+              <stop offset="15%"  stop-color="#fcd34d"/>
+              <stop offset="50%"  stop-color="#d97706"/>
+              <stop offset="85%"  stop-color="#92400e"/>
+              <stop offset="100%" stop-color="#6b2d0c"/>
             </linearGradient>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="3" result="blur"/>
+            <linearGradient id="cylGoldTop" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#fde68a"/>
+              <stop offset="50%"  stop-color="#fbbf24"/>
+              <stop offset="100%" stop-color="#fde68a"/>
+            </linearGradient>
+            <!-- Trend line gradient -->
+            <linearGradient id="trendLine" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#22c55e" stop-opacity="0.2"/>
+              <stop offset="60%"  stop-color="#f59e0b" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.8"/>
+            </linearGradient>
+            <!-- Sombra para pilas -->
+            <filter id="stShadow" x="-10%" y="-10%" width="130%" height="140%">
+              <feDropShadow dx="4" dy="7" stdDeviation="6" flood-color="rgba(0,0,0,0.85)"/>
+            </filter>
+            <!-- Brillo dorado cima -->
+            <filter id="goldGlow2" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="5" result="blur"/>
+              <feFlood flood-color="#f59e0b" flood-opacity="0.6" result="color"/>
+              <feComposite in="color" in2="blur" operator="in" result="glow"/>
+              <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- Glow flecha -->
+            <filter id="arrowGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="billShadow">
-              <feDropShadow dx="3" dy="5" stdDeviation="5" flood-color="rgba(0,0,0,0.75)"/>
-            </filter>
-            <filter id="topGlow">
-              <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#f59e0b" flood-opacity="0.7"/>
             </filter>
           </defs>
 
-          <!-- Línea de tendencia dorada -->
-          <line x1="20" y1="290" x2="330" y2="20" stroke="url(#goldTrend)" stroke-width="1.5" stroke-dasharray="7,5"/>
+          <!-- Línea de tendencia ascendente (dashed) -->
+          <line x1="18" y1="308" x2="348" y2="18" stroke="url(#trendLine)" stroke-width="1.5" stroke-dasharray="8,5" opacity="0.7"/>
 
-          <!-- Fondo de brillo detrás del escalón superior -->
-          <ellipse cx="260" cy="52" rx="55" ry="22" fill="rgba(245,158,11,0.08)"/>
+          <!-- ── Macro: cada step = grupo de cilindros apilados ── -->
+          <!-- Función visual por escalón: rect body + ellipse top + líneas divisoras + banda + texto -->
 
-          <!-- Billetes en escalera: se hacen más brillantes arriba -->
-          <!-- Escalón 1 (más bajo, izquierda) -->
-          <g filter="url(#billShadow)" transform="translate(12,240)">
-            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(134,239,172,0.35)" stroke-width="1"/>
-            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.12)" stroke-width="1"/>
-            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
-            <text x="46" y="25" text-anchor="middle" fill="rgba(187,247,208,0.85)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
+          <!-- STEP 1 — base, más ancho (6 rollos altos = 72px) -->
+          <g filter="url(#stShadow)" transform="translate(8, 240)">
+            <!-- body -->
+            <rect x="0" y="6" width="110" height="68" fill="url(#cyl)" rx="4"/>
+            <!-- top ellipse -->
+            <ellipse cx="55" cy="6" rx="55" ry="8" fill="url(#cylTop)"/>
+            <!-- divisor lines suggesting individual rolls -->
+            <line x1="1" y1="18" x2="109" y2="18" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+            <line x1="1" y1="30" x2="109" y2="30" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+            <line x1="1" y1="42" x2="109" y2="42" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+            <line x1="1" y1="54" x2="109" y2="54" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+            <line x1="1" y1="66" x2="109" y2="66" stroke="rgba(0,0,0,0.18)"       stroke-width="1"/>
+            <!-- band (paper wrapper) -->
+            <rect x="44" y="0" width="18" height="74" fill="rgba(205,185,75,0.55)" rx="2"/>
+            <!-- bill labels -->
+            <text x="18" y="44" fill="rgba(200,240,200,0.82)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
+            <text x="70" y="44" fill="rgba(200,240,200,0.82)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
           </g>
 
-          <!-- Escalón 2 -->
-          <g filter="url(#billShadow)" transform="translate(54,198)">
-            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(134,239,172,0.4)" stroke-width="1"/>
-            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.15)" stroke-width="1"/>
-            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
-            <text x="46" y="25" text-anchor="middle" fill="rgba(187,247,208,0.9)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
+          <!-- STEP 2 -->
+          <g filter="url(#stShadow)" transform="translate(50, 196)">
+            <rect x="0" y="6" width="100" height="62" fill="url(#cyl)" rx="4"/>
+            <ellipse cx="50" cy="6" rx="50" ry="7" fill="url(#cylTop)"/>
+            <line x1="1" y1="17" x2="99" y2="17" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="1" y1="29" x2="99" y2="29" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="1" y1="41" x2="99" y2="41" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+            <line x1="1" y1="54" x2="99" y2="54" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+            <line x1="1" y1="62" x2="99" y2="62" stroke="rgba(0,0,0,0.18)"       stroke-width="1"/>
+            <rect x="40" y="0" width="17" height="68" fill="rgba(205,185,75,0.55)" rx="2"/>
+            <text x="14" y="40" fill="rgba(200,240,200,0.85)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
+            <text x="64" y="40" fill="rgba(200,240,200,0.85)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
           </g>
 
-          <!-- Escalón 3 -->
-          <g filter="url(#billShadow)" transform="translate(96,156)">
-            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(134,239,172,0.45)" stroke-width="1"/>
-            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.18)" stroke-width="1"/>
-            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
-            <text x="46" y="25" text-anchor="middle" fill="rgba(187,247,208,0.9)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
+          <!-- STEP 3 -->
+          <g filter="url(#stShadow)" transform="translate(92, 154)">
+            <rect x="0" y="6" width="92" height="56" fill="url(#cyl)" rx="4"/>
+            <ellipse cx="46" cy="6" rx="46" ry="7" fill="url(#cylTop)"/>
+            <line x1="1" y1="17" x2="91" y2="17" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="1" y1="29" x2="91" y2="29" stroke="rgba(255,255,255,0.11)" stroke-width="1"/>
+            <line x1="1" y1="41" x2="91" y2="41" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+            <line x1="1" y1="53" x2="91" y2="53" stroke="rgba(0,0,0,0.18)"       stroke-width="1"/>
+            <rect x="37" y="0" width="16" height="62" fill="rgba(205,185,75,0.55)" rx="2"/>
+            <text x="10" y="36" fill="rgba(200,240,200,0.87)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
+            <text x="58" y="36" fill="rgba(200,240,200,0.87)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
           </g>
 
-          <!-- Escalón 4 -->
-          <g filter="url(#billShadow)" transform="translate(138,114)">
-            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(250,204,21,0.3)" stroke-width="1"/>
-            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(250,204,21,0.12)" stroke-width="1"/>
-            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
-            <text x="46" y="25" text-anchor="middle" fill="rgba(253,230,138,0.95)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
+          <!-- STEP 4 -->
+          <g filter="url(#stShadow)" transform="translate(136, 114)">
+            <rect x="0" y="5" width="84" height="50" fill="url(#cyl)" rx="4"/>
+            <ellipse cx="42" cy="5" rx="42" ry="6.5" fill="url(#cylTop)"/>
+            <line x1="1" y1="16" x2="83" y2="16" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+            <line x1="1" y1="28" x2="83" y2="28" stroke="rgba(255,255,255,0.11)" stroke-width="1"/>
+            <line x1="1" y1="40" x2="83" y2="40" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+            <line x1="1" y1="51" x2="83" y2="51" stroke="rgba(0,0,0,0.18)"       stroke-width="1"/>
+            <rect x="34" y="0" width="15" height="55" fill="rgba(215,195,85,0.6)" rx="2"/>
+            <text x="8"  y="33" fill="rgba(220,248,220,0.9)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
+            <text x="52" y="33" fill="rgba(220,248,220,0.9)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
           </g>
 
-          <!-- Escalón 5 -->
-          <g filter="url(#billShadow)" transform="translate(180,72)">
-            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(250,204,21,0.5)" stroke-width="1.2"/>
-            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(250,204,21,0.2)" stroke-width="1"/>
-            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
-            <text x="46" y="25" text-anchor="middle" fill="rgba(253,230,138,0.98)" font-size="12" font-weight="bold" font-family="monospace">$100</text>
+          <!-- STEP 5 -->
+          <g filter="url(#stShadow)" transform="translate(180, 76)">
+            <rect x="0" y="5" width="76" height="46" fill="url(#cyl)" rx="4"/>
+            <ellipse cx="38" cy="5" rx="38" ry="6" fill="url(#cylTop)"/>
+            <line x1="1" y1="16" x2="75" y2="16" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <line x1="1" y1="28" x2="75" y2="28" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="1" y1="40" x2="75" y2="40" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+            <line x1="1" y1="48" x2="75" y2="48" stroke="rgba(0,0,0,0.18)"       stroke-width="1"/>
+            <rect x="30" y="0" width="14" height="51" fill="rgba(225,200,90,0.65)" rx="2"/>
+            <text x="5"  y="31" fill="rgba(235,255,235,0.95)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
+            <text x="48" y="31" fill="rgba(235,255,235,0.95)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
           </g>
 
-          <!-- Escalón 6 (cima — dorado brillante) -->
-          <g filter="url(#topGlow)" transform="translate(222,30)">
-            <rect width="92" height="40" rx="5" fill="url(#billGrad)" stroke="rgba(250,204,21,0.85)" stroke-width="1.5"/>
-            <rect x="5" y="5" width="82" height="30" rx="2" fill="none" stroke="rgba(250,204,21,0.35)" stroke-width="1"/>
-            <rect width="92" height="40" rx="5" fill="url(#billShine)"/>
-            <text x="46" y="25" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="bold" font-family="monospace">$100</text>
+          <!-- STEP 6 — CIMA: dorado brillante -->
+          <g filter="url(#goldGlow2)" transform="translate(224, 38)">
+            <rect x="0" y="5" width="68" height="42" fill="url(#cylGold)" rx="4" stroke="rgba(251,191,36,0.7)" stroke-width="1"/>
+            <ellipse cx="34" cy="5" rx="34" ry="5.5" fill="url(#cylGoldTop)"/>
+            <line x1="1" y1="15" x2="67" y2="15" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+            <line x1="1" y1="26" x2="67" y2="26" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <line x1="1" y1="37" x2="67" y2="37" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <line x1="1" y1="44" x2="67" y2="44" stroke="rgba(0,0,0,0.25)"      stroke-width="1"/>
+            <rect x="27" y="0" width="13" height="47" fill="rgba(253,230,138,0.7)" rx="2"/>
+            <text x="5"  y="29" fill="rgba(255,243,195,0.98)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
+            <text x="45" y="29" fill="rgba(255,243,195,0.98)" font-size="9" font-weight="bold" font-family="monospace">$100</text>
           </g>
 
-          <!-- Flecha ascendente dorada -->
-          <g filter="url(#glow)">
-            <line x1="316" y1="50" x2="316" y2="22" stroke="#f59e0b" stroke-width="2.5"/>
-            <polygon points="308,26 316,8 324,26" fill="#f59e0b"/>
+          <!-- Flecha ascendente dorada con glow -->
+          <g filter="url(#arrowGlow)">
+            <line x1="340" y1="60" x2="340" y2="22" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="331,30 340,10 349,30" fill="#f59e0b"/>
           </g>
 
-          <!-- Pequeños puntos de datos -->
-          <circle cx="58" cy="268" r="3" fill="#22c55e" opacity="0.6"/>
-          <circle cx="100" cy="226" r="3" fill="#22c55e" opacity="0.7"/>
-          <circle cx="142" cy="184" r="3" fill="#22c55e" opacity="0.8"/>
-          <circle cx="184" cy="142" r="3.5" fill="#f59e0b" opacity="0.8"/>
-          <circle cx="226" cy="100" r="3.5" fill="#f59e0b" opacity="0.9"/>
-          <circle cx="268" cy="58" r="4" fill="#f59e0b" opacity="1"/>
+          <!-- Data-point dots along staircase diagonal -->
+          <circle cx="63"  cy="274" r="3.5" fill="#22c55e" opacity="0.65"/>
+          <circle cx="102" cy="230" r="3.5" fill="#22c55e" opacity="0.75"/>
+          <circle cx="140" cy="188" r="4"   fill="#22c55e" opacity="0.85"/>
+          <circle cx="179" cy="148" r="4"   fill="#f59e0b" opacity="0.85"/>
+          <circle cx="220" cy="108" r="4.5" fill="#f59e0b" opacity="0.92"/>
+          <circle cx="260" cy="68"  r="5"   fill="#fcd34d" opacity="1"/>
         </svg>
 
         <!-- Badges flotantes sobre el visual -->
