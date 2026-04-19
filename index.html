@@ -4,149 +4,227 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JR Trading | Señales VIP & Curso de Futuros Perpetuos — Jorge Ramírez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- NAVEGACIÓN -->
-  <nav>
-    <a href="#hero">🐂 JR Trading</a>
-    <ul>
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo"><span class="logo-bull">🐂</span> JR<span class="logo-accent">Trading</span></a>
+    <ul class="nav-links">
       <li><a href="#about">Sobre mí</a></li>
       <li><a href="#products">Productos</a></li>
       <li><a href="#results">Resultados</a></li>
       <li><a href="#trades">Trades</a></li>
     </ul>
-    <a href="#products">Unirme al VIP →</a>
+    <a href="#products" class="nav-cta">Unirme al VIP →</a>
   </nav>
 
   <!-- HERO -->
   <section id="hero">
 
-    <!-- Visual: Toro (esquina inferior izquierda) -->
-    <div>
-      <span>🐂</span>
-      <p>BULL MARKET</p>
+    <!-- Decoración: esquinas de color -->
+    <div class="hero-corner-green"></div>
+    <div class="hero-corner-red"></div>
+
+    <!-- Toro — esquina inferior izquierda -->
+    <div class="hero-bull">
+      <span class="animal-emoji">🐂</span>
+      <p class="animal-label">BULL MARKET</p>
     </div>
 
-    <!-- Visual: Oso (esquina superior derecha) -->
-    <div>
-      <span>🐻</span>
-      <p>BEAR MARKET</p>
+    <!-- Oso — esquina superior derecha -->
+    <div class="hero-bear">
+      <span class="animal-emoji">🐻</span>
+      <p class="animal-label">BEAR MARKET</p>
     </div>
 
-    <!-- Escalera de billetes de $100 (gráfico alcista) -->
-    <div>
-      <svg viewBox="0 0 340 300" width="340" height="300" xmlns="http://www.w3.org/2000/svg">
-        <!-- Línea de tendencia alcista -->
-        <line x1="20" y1="270" x2="310" y2="30" stroke="green" stroke-width="1" stroke-dasharray="5,5"/>
-        <!-- Billetes de $100 en escalera ascendente -->
-        <g transform="translate(10,220)">
-          <rect width="88" height="38" rx="4" fill="darkgreen" stroke="green"/>
-          <text x="44" y="24" text-anchor="middle" fill="lightgreen" font-size="11" font-weight="bold" font-family="monospace">$100</text>
-        </g>
-        <g transform="translate(50,183)">
-          <rect width="88" height="38" rx="4" fill="darkgreen" stroke="green"/>
-          <text x="44" y="24" text-anchor="middle" fill="lightgreen" font-size="11" font-weight="bold" font-family="monospace">$100</text>
-        </g>
-        <g transform="translate(90,146)">
-          <rect width="88" height="38" rx="4" fill="darkgreen" stroke="green"/>
-          <text x="44" y="24" text-anchor="middle" fill="lightgreen" font-size="11" font-weight="bold" font-family="monospace">$100</text>
-        </g>
-        <g transform="translate(130,109)">
-          <rect width="88" height="38" rx="4" fill="darkgreen" stroke="green"/>
-          <text x="44" y="24" text-anchor="middle" fill="lightgreen" font-size="11" font-weight="bold" font-family="monospace">$100</text>
-        </g>
-        <g transform="translate(170,72)">
-          <rect width="88" height="38" rx="4" fill="darkgreen" stroke="green"/>
-          <text x="44" y="24" text-anchor="middle" fill="lightgreen" font-size="11" font-weight="bold" font-family="monospace">$100</text>
-        </g>
-        <g transform="translate(210,35)">
-          <rect width="88" height="38" rx="4" fill="darkgreen" stroke="green"/>
-          <text x="44" y="24" text-anchor="middle" fill="lightgreen" font-size="11" font-weight="bold" font-family="monospace">$100</text>
-        </g>
-        <!-- Flecha apuntando hacia arriba -->
-        <polygon points="295,15 308,15 301,3" fill="green"/>
-      </svg>
+    <!-- Grid interior: texto izquierda | escalera derecha -->
+    <div class="hero-inner">
+
+      <!-- Contenido principal -->
+      <div class="hero-content">
+        <p class="hero-badge"><span class="badge-dot"></span> Canal VIP abierto — cupos limitados</p>
+        <h1>Trades <span class="text-green">ganadores</span> directo a tu <span class="text-gold">bolsillo</span></h1>
+        <p class="hero-sub">
+          Señales de futuros perpetuos en Binance con <strong>90% de tasa de victoria</strong>,
+          analizadas por un trader con 4 años de experiencia y <strong>+$59,000 generados</strong>.
+        </p>
+        <div class="hero-btns">
+          <a href="#products" class="btn-primary">🚀 Quiero el VIP</a>
+          <a href="#about" class="btn-secondary">Conocer más</a>
+        </div>
+        <!-- Mini estadísticas -->
+        <ul class="hero-stats">
+          <li><strong>+$59,000</strong><span>generados en total</span></li>
+          <li><strong>90%</strong><span>tasa de victoria</span></li>
+          <li><strong>4 años</strong><span>de experiencia</span></li>
+        </ul>
+      </div>
+
+      <!-- Escalera de billetes de $100 -->
+      <div class="hero-visual">
+        <svg viewBox="0 0 340 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="billGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#14532d"/>
+              <stop offset="100%" stop-color="#166534"/>
+            </linearGradient>
+            <filter id="shadow">
+              <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="rgba(0,0,0,0.6)"/>
+            </filter>
+          </defs>
+          <!-- Línea de tendencia -->
+          <line x1="20" y1="270" x2="310" y2="30" stroke="rgba(34,197,94,0.3)" stroke-width="1" stroke-dasharray="6,4"/>
+          <!-- Billetes en escalera -->
+          <g filter="url(#shadow)" transform="translate(10,220)">
+            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.5)" stroke-width="1"/>
+            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.2)" stroke-width="1"/>
+            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+          </g>
+          <g filter="url(#shadow)" transform="translate(50,183)">
+            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.5)" stroke-width="1"/>
+            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.2)" stroke-width="1"/>
+            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+          </g>
+          <g filter="url(#shadow)" transform="translate(90,146)">
+            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.5)" stroke-width="1"/>
+            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.2)" stroke-width="1"/>
+            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+          </g>
+          <g filter="url(#shadow)" transform="translate(130,109)">
+            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.55)" stroke-width="1"/>
+            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.25)" stroke-width="1"/>
+            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+          </g>
+          <g filter="url(#shadow)" transform="translate(170,72)">
+            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.6)" stroke-width="1"/>
+            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.3)" stroke-width="1"/>
+            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+          </g>
+          <g filter="url(#shadow)" transform="translate(210,35)">
+            <rect width="88" height="38" rx="4" fill="url(#billGrad)" stroke="rgba(134,239,172,0.7)" stroke-width="1"/>
+            <rect x="4" y="4" width="80" height="30" rx="2" fill="none" stroke="rgba(134,239,172,0.35)" stroke-width="1"/>
+            <text x="44" y="24" text-anchor="middle" fill="rgba(187,247,208,0.95)" font-size="11" font-weight="bold" font-family="monospace">$100</text>
+          </g>
+          <!-- Flecha arriba -->
+          <polygon points="295,15 308,15 301,3" fill="#22c55e"/>
+          <line x1="301" y1="15" x2="301" y2="35" stroke="rgba(34,197,94,0.6)" stroke-width="2"/>
+        </svg>
+
+        <!-- Badges flotantes sobre el visual -->
+        <div class="badge-win">
+          <span class="badge-label">Tasa de victoria</span>
+          <span class="badge-value">90%</span>
+          <span class="badge-sub">Últimos 24 meses</span>
+        </div>
+        <div class="badge-earn">
+          <span class="badge-label">Generado en total</span>
+          <span class="badge-value">+$59,000</span>
+          <span class="badge-sub">En Binance Futures</span>
+        </div>
+      </div>
+
     </div>
-
-    <!-- Contenido principal -->
-    <div>
-      <p>● Canal VIP abierto — cupos limitados</p>
-      <h1>Trades ganadores directo a tu bolsillo</h1>
-      <p>
-        Señales de futuros perpetuos en Binance con <strong>90% de tasa de victoria</strong>,
-        analizadas por un trader con 4 años de experiencia y <strong>+$59,000 generados</strong>.
-      </p>
-      <a href="#products">🚀 Quiero el VIP</a>
-      <a href="#about">Conocer más</a>
-
-      <!-- Mini estadísticas -->
-      <ul>
-        <li><strong>+$59,000</strong> generados en total</li>
-        <li><strong>90%</strong> tasa de victoria</li>
-        <li><strong>4 años</strong> de experiencia</li>
-      </ul>
-    </div>
-
   </section>
 
   <!-- BARRA DE ESTADÍSTICAS -->
   <section id="stats">
-    <ul>
-      <li>📈 <strong>+$59,000</strong> generados en total</li>
-      <li>🎯 <strong>90%</strong> tasa de victoria</li>
-      <li>⏱️ <strong>1–2</strong> trades por día</li>
-      <li>💰 <strong>$2,900–$9,200</strong> al mes (últ. 2 años)</li>
-      <li>🔥 <strong>4</strong> años de experiencia</li>
-      <li>🏆 <strong>+100%</strong> ROI posible</li>
-    </ul>
+    <div class="stats-track">
+      <ul class="stats-ticker">
+        <li><span class="stat-icon">📈</span><strong>+$59,000</strong><span>generados en total</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">🎯</span><strong>90%</strong><span>tasa de victoria</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">⏱️</span><strong>1–2</strong><span>trades por día</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">💰</span><strong>$2,900–$9,200</strong><span>al mes (últ. 2 años)</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">🔥</span><strong>4</strong><span>años de experiencia</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">🏆</span><strong>+100%</strong><span>ROI posible</span></li>
+        <li class="stat-sep">|</li>
+        <!-- duplicado para loop infinito -->
+        <li><span class="stat-icon">📈</span><strong>+$59,000</strong><span>generados en total</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">🎯</span><strong>90%</strong><span>tasa de victoria</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">⏱️</span><strong>1–2</strong><span>trades por día</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">💰</span><strong>$2,900–$9,200</strong><span>al mes (últ. 2 años)</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">🔥</span><strong>4</strong><span>años de experiencia</span></li>
+        <li class="stat-sep">|</li>
+        <li><span class="stat-icon">🏆</span><strong>+100%</strong><span>ROI posible</span></li>
+        <li class="stat-sep">|</li>
+      </ul>
+    </div>
   </section>
 
   <!-- SOBRE MÍ -->
   <section id="about">
-    <h2>No vendo humo. Vendo resultados.</h2>
+    <div class="about-inner">
 
-    <div>
-      <p>
-        Soy <strong>Jorge Ramírez Arias</strong>, trader de futuros perpetuos en Binance con
-        <strong>4 años de experiencia</strong> y más de <strong>$59,000 generados</strong>
-        en el mercado de criptomonedas.
-      </p>
-      <p>
-        Quiero ser completamente honesto: <strong>yo también conocí las pérdidas</strong>. Antes de
-        encontrar mi estrategia, perdí dinero, dormí poco, y pasé hasta 16 horas diarias frente a
-        gráficos en Binance. No me rendí. Seguí analizando, seguí invirtiendo, seguí buscando.
-        <strong>Todo proyecto lleva sacrificio, y yo estuve dispuesto a hacerlo.</strong>
-      </p>
-      <p>
-        Hoy, por los últimos <strong>2 años consecutivos</strong>, he generado entre
-        <strong>$2,900 y $9,200 mensuales</strong> con mi estrategia. No vivo completamente de
-        esto aún — soy transparente — pero estoy moldeando mi futuro con cripto, y puedo
-        ayudarte a construir el tuyo.
-      </p>
-    </div>
+      <div class="about-text">
+        <span class="section-label">Sobre mí</span>
+        <h2>No vendo humo.<br>Vendo resultados.</h2>
+        <p>
+          Soy <strong>Jorge Ramírez Arias</strong>, trader de futuros perpetuos en Binance con
+          <strong>4 años de experiencia</strong> y más de <strong class="text-gold">$59,000 generados</strong>
+          en el mercado de criptomonedas.
+        </p>
+        <p>
+          Quiero ser completamente honesto: <strong>yo también conocí las pérdidas</strong>. Antes de
+          encontrar mi estrategia, perdí dinero, dormí poco, y pasé hasta 16 horas diarias frente a
+          gráficos en Binance. No me rendí. Seguí analizando, seguí invirtiendo, seguí buscando.
+          <strong>Todo proyecto lleva sacrificio, y yo estuve dispuesto a hacerlo.</strong>
+        </p>
+        <p>
+          Hoy, por los últimos <strong class="text-green">2 años consecutivos</strong>, he generado entre
+          <strong class="text-gold">$2,900 y $9,200 mensuales</strong> con mi estrategia. No vivo completamente de
+          esto aún — soy transparente — pero estoy moldeando mi futuro con cripto, y puedo
+          ayudarte a construir el tuyo.
+        </p>
+      </div>
 
-    <div>
-      <article>
-        <h3>🎯 Estrategia propia y probada</h3>
-        <p>Desarrollé mi propia estrategia de análisis basada en rupturas de patrones, soportes,
-        resistencias y gestión de riesgo. 2 años de resultados consistentes lo respaldan.</p>
-      </article>
-      <article>
-        <h3>🔍 Análisis manual, sin bots</h3>
-        <p>Cada señal que envío al canal VIP la analizo personalmente. No uso bots ni señales de
-        terceros. Si no veo la oportunidad, no envío nada.</p>
-      </article>
-      <article>
-        <h3>🤝 Transparencia total</h3>
-        <p>He ayudado a amigos y conocidos a crecer en trading. Thomas, Hendrick, Kevin, Celeste
-        — todos tienen resultados reales y documentados. Nada está fabricado.</p>
-      </article>
-      <article>
-        <h3>📊 Binance Futuros Perpetuos</h3>
-        <p>Especializado en futuros perpetuos en Binance, el exchange más grande del mundo con
-        la mayor liquidez del mercado crypto.</p>
-      </article>
+      <div class="about-cards">
+        <article class="about-card">
+          <span class="card-icon">🎯</span>
+          <div>
+            <h3>Estrategia propia y probada</h3>
+            <p>Desarrollé mi propia estrategia de análisis basada en rupturas de patrones, soportes,
+            resistencias y gestión de riesgo. 2 años de resultados consistentes lo respaldan.</p>
+          </div>
+        </article>
+        <article class="about-card">
+          <span class="card-icon">🔍</span>
+          <div>
+            <h3>Análisis manual, sin bots</h3>
+            <p>Cada señal que envío al canal VIP la analizo personalmente. No uso bots ni señales de
+            terceros. Si no veo la oportunidad, no envío nada.</p>
+          </div>
+        </article>
+        <article class="about-card">
+          <span class="card-icon">🤝</span>
+          <div>
+            <h3>Transparencia total</h3>
+            <p>He ayudado a amigos y conocidos a crecer en trading. Thomas, Hendrick, Kevin, Celeste
+            — todos tienen resultados reales y documentados. Nada está fabricado.</p>
+          </div>
+        </article>
+        <article class="about-card">
+          <span class="card-icon">📊</span>
+          <div>
+            <h3>Binance Futuros Perpetuos</h3>
+            <p>Especializado en futuros perpetuos en Binance, el exchange más grande del mundo con
+            la mayor liquidez del mercado crypto.</p>
+          </div>
+        </article>
+      </div>
+
     </div>
   </section>
 
